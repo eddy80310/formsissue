@@ -1,3 +1,18 @@
-<h1>
-  {{title}}
-</h1>
+<form [formGroup]="myForm" novalidate (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label>Reference Number</label>
+    <input type="text" class="form-control" formControlName="refNumber">
+  </div>
+
+  <!--Date Picker-->
+  <label>Date: </label>
+  <input (focus)="toggleDatePicker(true)" value={{dateValue}} class="form-control" formControlName="date" />
+  <date-picker *ngIf="showDatePicker" [initDate]="dateValue" (onDatePickerCancel)="toggleDatePicker($event)" (onSelectDate)="setDate($event)"
+    ngDefaultControl></date-picker>
+
+  <div class="margin-20">
+    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+  </div>
+  
+</form>

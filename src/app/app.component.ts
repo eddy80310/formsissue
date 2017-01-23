@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormArray,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms'
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +14,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  
+  public myForm: FormGroup;
+  
+  // Date TimePicker
+  private dateValue = "1234"
+  private showDatePicker: boolean;
+
+  constructor(private _fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.myForm = this._fb.group({
+      refNumber: [''],
+      date: [''],
+    });
+  }
+
+  onSubmit() {
+    // console.log(formOutput.value);
+    console.log(this.myForm.value);
+  }
+
+  // Date Picker
+  toggleDatePicker(status: boolean): void {
+    this.showDatePicker = status;
+  }
+
+  setDate(date: Object): void {
+    // console.log(typeof(date.toString()));
+    this.dateValue = date.toString();
+  }
 }
